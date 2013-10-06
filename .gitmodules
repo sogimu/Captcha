@@ -1,3 +1,0 @@
-[submodule "frontend/ArmEngine"]
-	path = frontend/ArmEngine
-	url = https://github.com/sogimu/ArmEngine

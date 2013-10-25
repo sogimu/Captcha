@@ -1,19 +1,16 @@
 <?php
 /**
- * MainController
+ * MessagesController
  * Feel free to delete the methods and replace them with your own code.
  *
  * @author darkredz
  */
-class MainController extends DooController{
+class MessagesController extends DooController{
 
     public function index(){
 		//Just replace these
-		//Doo::loadCore('app/DooSiteMagic');
-		//DooSiteMagic::displayHome();
-		//$data['baseurl'] = Doo::conf()->APP_URL;
-        $this->view()->render('index');
-
+		Doo::loadCore('app/DooSiteMagic');
+		DooSiteMagic::displayHome();
     }
 	
 	public function allurl(){	

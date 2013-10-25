@@ -56,7 +56,9 @@
  
 $route['*']['/'] = array('MainController', 'index');
 $route['*']['/error'] = array('ErrorController', 'index');
-
+$route['*']['/getMessages'] = array('MessagesController', 'getMessages');
+$route['*']['/getTask'] = array('MessagesController', 'getTask');
+$route['*']['/addMessage'] = array('MessagesController', 'addMessage');
 
 //---------- Delete if not needed ------------
 $admin = array('admin'=>'1234');

@@ -7,6 +7,6 @@
         return me;
     };
 
-    window.Capcha.LoadLine = LoadLine;
+    window.Captcha.LoadLine = LoadLine;
 
 })(window);

@@ -1,5 +1,5 @@
 (function(window) {
-    var Capcha = function() {
+    var LoadLine = function() {
 
         var me = {};
 
@@ -7,6 +7,6 @@
         return me;
     };
 
-    window.Capcha.Capcha = Capcha;
+    window.Captcha.LoadLine = LoadLine;
 
 })(window);

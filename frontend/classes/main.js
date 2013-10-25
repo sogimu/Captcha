@@ -1,11 +1,21 @@
 window.onload = function() {
 
-    layer1 = ArmContext.Layer({name: "layer1", container: "container"});
+    Root = new ArmGraph.Root({fps: 0});
     
-    layer1.ListenMouseEvents();
+    G = new Captcha.Captcha({owner: Root})
+	// new Captcha.Item({owner: G, x: 100, y: 100, width: 100, height: 100});
 
-    Root = new ArmGraph.Root({layer: layer1, fps: 0});
-     
+	// img = new Image();
+ //    img.onload = function() {
+ //    	console.log("img load");
+ //    }
+ //    img.src = "img/image0.png";
+	// G.GetTask();
+
     Root.Start();
+	
+
+
+
 
 };

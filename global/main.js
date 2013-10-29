@@ -4,8 +4,6 @@ window.onload = function() {
     
     G = new Captcha.Captcha({owner: Root, width: 200, height: 140})
 
-    G.GetMap();
-
     Root.Start();
 	
 };

@@ -16,24 +16,38 @@
         me._height = 500;
 
         me.GetTask = function() {
-            //var itemW = 100;
-            //var itemH = 100;
-            //var x = 0;
-            //var y = 0;
-            var map = new Captcha.Map({items: [
-                {id: 1, pos: {x: 0, y: 0}, path: "global/img/image0.png"},
-                {id: 2, pos: {x: 1, y: 0}, path: "global/img/image1.png"},
-                {id: 3, pos: {x: 0, y: 1}, path: "global/img/image2.png"},
-                {id: 4, pos: {x: 1, y: 1}, path: "global/img/image3.png"}],
-                //itemWidth: itemW,
-                //itemHeight: itemH,
-                row: 2,
-                col: 2}
-            );
-            
-            var task = {map: map};
+            var map = {};
 
-            this.SetMap(task.map);
+            var self = this;
+
+            $.ajax({
+                url: "index.php/getTask",
+                dataType: 'json',
+                // data: data,
+                success: function( data ) {
+                    map = data;
+                    console.log(data);
+                    console.log( "success" );    
+            
+
+
+            // var map = new Captcha.Map({items: [
+            //     {id: 1, pos: {x: 0, y: 0}, path: "global/img/image0.png"},
+            //     {id: 2, pos: {x: 1, y: 0}, path: "global/img/image1.png"},
+            //     {id: 3, pos: {x: 0, y: 1}, path: "global/img/image2.png"},
+            //     {id: 4, pos: {x: 1, y: 1}, path: "global/img/image3.png"}],
+            //     //itemWidth: itemW,
+            //     //itemHeight: itemH,
+            //     row: 2,
+            //     col: 2}
+            // );
+
+                    
+
+                    self.SetMap(new Captcha.Map(map));
+                }
+
+            });
         };
 
         me.CheckTask = function() {
@@ -41,48 +55,18 @@
         };        
 
         me.GetMap = function() {
-            var map = new Captcha.Map();
             var items = [];
-            var counter = 0;
-            var line = [];
             
             for(var itemName in this._items) {
                 var item = this._items[itemName];
 
-                line.push({id: item.GetID(), pos: {x: item.GetX(), y: item.GetY()}, path: item.GetPath()});
-
-                counter++;
-                if(counter == this._col) {
-                    line = gizmo.nativeSort({mas: line, target: '<', field: "pos.x"});
-                    items.push(line);
-                    counter = 0;
-
-                    line = [];
-                };
+                items.push({id: item.GetID(), pos: {x: item.GetX(), y: item.GetY()}, path: item.GetPath()});
                 
             };
 
-            items = [];
-            counter = 0;
-            line = [];
+            console.log(items)
+            return new Captcha.Map({"items": items, row: this.GetRow(), col: this.GetCol()});
 
-            for(var i=0;i<items[0].length; i++){
-                for(var itemLineName in items) {
-                    var item = items[itemLineName][i];
-
-                    line.push({id: item.id, pos: {x: item.pos.x, y: item.pos.y}, path: item.path});
-
-                }
-
-                line = gizmo.nativeSort({mas: line, target: '<', field: "pos.y"});
-                items.push(line);
-                counter = 0;
-
-                line = [];                
-            }
-
-            var d;
-            
         };
 
         me.SetMap = function(map) {
@@ -137,6 +121,14 @@
 
         me.GetHeight = function() {
             return this._height;
+        };
+
+        me.GetRow = function() {
+            return this._row;
+        };
+
+        me.GetCol = function() {
+            return this._col;
         };
 
         me.Set = function(O) {

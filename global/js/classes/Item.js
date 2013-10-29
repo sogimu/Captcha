@@ -10,9 +10,9 @@
             
             if(this.isDruging && x > this.GetMaxLeft() && x < this.GetMaxRight() && y > this.GetMaxTop() && y < this.GetMaxBottom()) {
                 
-                this.x = x - this.offsetX;
-                this.y = y - this.offsetY;
-                this.Button.TranslateTo({x: this.x, y: this.y});
+                this.SetX( x - this.offsetX );
+                this.SetY( y - this.offsetY );
+                this.GetPrimitiveImage().TranslateTo({x: me.GetX(), y: me.GetY()});
 
             }
 
@@ -21,12 +21,12 @@
             var x = e.e.offsetX;
             var y = e.e.offsetY;
             
-            if( this.Button.HasPoint({x: x, y: y}) ) {
+            if( this.GetPrimitiveImage().HasPoint({x: x, y: y}) ) {
                 
                 this.isDruging = true;
 
-                this.offsetX = x - Math.round(this.Button._globalRepresentation.GetX())//this.ButtonX;
-                this.offsetY = y - Math.round(this.Button._globalRepresentation.GetY())//this.ButtonY;
+                this.offsetX = x - Math.round(this.GetPrimitiveImage()._globalRepresentation.GetX())//this.GetPrimitiveImage()X;
+                this.offsetY = y - Math.round(this.GetPrimitiveImage()._globalRepresentation.GetY())//this.GetPrimitiveImage()Y;
 
             }
 
@@ -134,6 +134,10 @@
         me.GetImage = function() {
             return this._image;
         };
+
+        me.GetPrimitiveImage = function() {
+            return this._primitiveImage;
+        };
         
         me.Set = function(O) {
             for(var name in O) {
@@ -193,8 +197,8 @@
 
         me.layer = me.GetProp("owner").layer;
 
-        me.Button = new ArmContext.Image({layer: me.layer, image: me.GetImage(), width: me.GetWidth(), height: me.GetHeigth()})
-        me.Button.TranslateTo({x: me.GetX(), y: me.GetY()})
+        me._primitiveImage = new ArmContext.Image({layer: me.layer, image: me.GetImage(), width: me.GetWidth(), height: me.GetHeigth()})
+        me.GetPrimitiveImage().TranslateTo({x: me.GetX(), y: me.GetY()})
 
         return me;
     };

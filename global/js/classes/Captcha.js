@@ -19,35 +19,36 @@
             var map = {};
 
             var self = this;
-
-            $.ajax({
-                url: "index.php/getTask",
-                dataType: 'json',
-                // data: data,
-                success: function( data ) {
-                    map = data;
-                    console.log(data);
-                    console.log( "success" );    
+            
+            $('#myModal').modal('show');
+            
+            // $.ajax({
+            //     url: "index.php/getTask",
+            //     dataType: 'json',
+            //     // data: data,
+            //     success: function( data ) {
+            //         map = data;
+            //         console.log(data);
+            //         console.log( "success" );    
             
 
 
-            // var map = new Captcha.Map({items: [
-            //     {id: 1, pos: {x: 0, y: 0}, path: "global/img/image0.png"},
-            //     {id: 2, pos: {x: 1, y: 0}, path: "global/img/image1.png"},
-            //     {id: 3, pos: {x: 0, y: 1}, path: "global/img/image2.png"},
-            //     {id: 4, pos: {x: 1, y: 1}, path: "global/img/image3.png"}],
-            //     //itemWidth: itemW,
-            //     //itemHeight: itemH,
-            //     row: 2,
-            //     col: 2}
-            // );
+            var map = {items: [
+                {id: 1, pos: {x: 0, y: 0}, path: "global/img/image0.png"},
+                {id: 2, pos: {x: 1, y: 0}, path: "global/img/image1.png"},
+                {id: 3, pos: {x: 0, y: 1}, path: "global/img/image2.png"},
+                {id: 4, pos: {x: 1, y: 1}, path: "global/img/image3.png"}],
+                //itemWidth: itemW,
+                //itemHeight: itemH,
+                row: 2,
+                col: 2};
 
                     
 
                     self.SetMap(new Captcha.Map(map));
-                }
+                // }
 
-            });
+            // });
         };
 
         me.CheckTask = function() {
@@ -99,7 +100,8 @@
                     var item = new Captcha.Item({owner: self, id: elem.id+"", path: elem.path, image: this.GetObject(elem.id+""), x: elem.pos.x *wK, y: elem.pos.y * hK, width: wK/* * map.GetItemWidth()*/, height: hK /** map.GetItemHeight()*/, maxLeft: 0, maxTop: 0, maxRight: self.GetWidth(), maxBottom: self.GetHeight()});
                     self._items.push( item );
                 };
-
+                $('#myModal').modal('hide');
+            
             })
             .Start();
 

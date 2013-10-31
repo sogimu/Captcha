@@ -17,16 +17,26 @@ class AjaxController extends DooController{
 		$i=0;
 		$newPositions = [];
 
-		foreach ($items as $key => $value) {
-			$newPositions[$i] = $value.pos;
+		foreach ($items["items"] as $key => $value) {
+			// var_dump($value);
+			$newPositions[$i] = $value["pos"];
+			$i += 1;
+
+		};
+		
+		shuffle($newPositions);
+
+		$i=0;
+		foreach ($items["items"] as $key => $value) {
+			$items["items"][$key]["pos"] = $newPositions[$i];
 			$i += 1;
 
 		};
 		
 		
-		var_dump($items);
+		$data["task"] = json_encode($items);
 
-	    $this->view()->render('task');
+	    $this->view()->render('task', $data);
 	}
 	
     public function addMessage(){

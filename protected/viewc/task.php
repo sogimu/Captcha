@@ -1,1 +1,1 @@
-<?php echo $data['task']; ?>
+<?php echo $data['taskIntoJSON']; ?>

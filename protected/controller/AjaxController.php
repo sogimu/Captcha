@@ -7,17 +7,30 @@
  */
 class AjaxController extends DooController{
 
+	/**
+	* Instace of DooSession
+	*/
+
+	public $_application = null;
+
+    public function __construct() {
+		// add sessions
+		$this->_application = Doo::session("mysite");
+	}
+
 	public function getTask() {
 		$tasks = Doo::db()->find('Tasks');
 
 		$task = $tasks[array_rand($tasks,1)];
-		// var_dump($task);
+		
+		$taskIntoPHP = unserialize( $task->taskIntoJSON );
+		
+		$this->_application->taskIntoPHP = $taskIntoPHP;
 
-		$items = unserialize( $task->items );
 		$i=0;
 		$newPositions = [];
 
-		foreach ($items["items"] as $key => $value) {
+		foreach ($taskIntoPHP["items"] as $key => $value) {
 			// var_dump($value);
 			$newPositions[$i] = $value["pos"];
 			$i += 1;
@@ -27,19 +40,38 @@ class AjaxController extends DooController{
 		shuffle($newPositions);
 
 		$i=0;
-		foreach ($items["items"] as $key => $value) {
-			$items["items"][$key]["pos"] = $newPositions[$i];
+		foreach ($taskIntoPHP["items"] as $key => $value) {
+			$taskIntoPHP["items"][$key]["pos"] = $newPositions[$i];
 			$i += 1;
 
 		};
 		
 		
-		$data["task"] = json_encode($items);
+		$data["taskIntoJSON"] = json_encode($taskIntoPHP);
+
+		// sleep(5);
 
 	    $this->view()->render('task', $data);
 	}
 	
     public function addMessage(){
+		$data = json_decode($_POST["data"]);
+		$mapFromClient = $data->map;
+		$rightMap = $this->_application->taskIntoPHP;
+
+		var_dump($mapFromClient);
+		echo "*****************";
+		var_dump($rightMap);
+
+		foreach ($mapFromClient->items as $key0 => $value0) {
+			
+		}
+    	
+    	// echo json_encode(array("status" => true));
+    }
+
+    public function getMessages(){
+
     	
     }
     

@@ -64,7 +64,7 @@
                 </div>
                  -->
                 <div class="input-append">
-                  <input  class="span12" placeholder="Новое сообщение" id="appendedInputButton" type="text">
+                  <input  class="span12" placeholder="Новое сообщение" id="newMessageInput" type="text">
                   <button class="btn btn-primary" type="button">    Go!</button>
                 </div>
 
@@ -76,9 +76,6 @@
       </div>
     </div>
 
-    <!-- Button to trigger modal -->
-    <a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
-     
     <!-- Modal -->
     <div id="myModal" class="modal hide fade" tabindex="-1" data-keyboard=false data-backdrop=false role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-header">

@@ -5,31 +5,27 @@
         var me = {};
 
         me._items = [];
-        // me._itemWidth = 400;
-        // me._itemHeight = 300;
         me._row = 0;
         me._col = 0;
 
-        me.GetJSON = function() {
+        me.GetJSON = function(itemWidth, itemHeight) {
+            var items = this.GetItems();
+
+            for(var itemName in items) {
+                var item = items[itemName];
+
+                item.pos.x /= itemWidth;
+                item.pos.y /= itemHeight;
+            }   
+                     
             var map = {
-                items: this.GetItems(),
-                // width: this.GetItemWidth(),
-                // height: this.GetItemHeight(),
+                items: items,
                 row: this.GetRow(),
                 col: this.GetCol()
             };
 
             return map; 
         };
-        // me.SetItemWidth = function(width) {
-        //     gizmo.Filter(width, "Number");
-        //     this._width = width;
-        // };
-
-        // me.SetItemHeight = function(height) {
-        //     gizmo.Filter(height, "Number");
-        //     this._height = height;
-        // };
 
         me.SetRow = function(row) {
             gizmo.Filter(row, "Number");
@@ -46,14 +42,6 @@
             this._items = items;
         };
 
-        // me.GetItemWidth = function() {
-        //     return this._itemWidth;
-        // };
-
-        // me.GetItemHeight = function() {
-        //     return this._itemHeight;
-        // };
-
         me.GetRow = function() {
             return this._row;
         };
@@ -69,12 +57,6 @@
         me.Set = function(O) {
             for(var name in O) {
                 switch( name ) {
-                    // case "itemWidth" : {  this.SetItemWidth(O[name]); };
-                    // break;
-                    
-                    // case "itemHeight": {  this.SetItemHeight(O[name]); };
-                    // break;
-
                     case "row" : {  this.SetRow(O[name]); };
                     break;
                     

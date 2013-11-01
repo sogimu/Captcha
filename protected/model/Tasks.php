@@ -3,7 +3,7 @@ Doo::loadCore('db/DooSmartModel');
 
 class Tasks extends DooSmartModel{
 	public $id;
-    public $items;
+    public $taskIntoJSON;
 
     public function  __construct($data=null) {
         parent::__construct( $data );
@@ -12,6 +12,6 @@ class Tasks extends DooSmartModel{
 
     public $_table = 'tasks';
     public $_primarykey = 'id';
-    public $_fields = array('id', 'items');
+    public $_fields = array('id', 'taskIntoJSON');
 }
 ?>

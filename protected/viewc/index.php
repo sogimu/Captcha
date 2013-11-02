@@ -101,7 +101,7 @@
     <script src="./global/js/classes/ProgressBar.js"></script>
     <script src="./global/js/classes/Item.js"></script>
     
-    <script src="./global/main.js"></script>
+    <script src="./global/js/main.js"></script>
 
     <script src="./global/js/jquery.js"></script>
     <script src="./global/bootstrap/js/bootstrap.min.js"></script>

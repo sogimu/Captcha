@@ -98,7 +98,6 @@
 
     <script src="./global/js/classes/Captcha.js"></script>
     <script src="./global/js/classes/Map.js"></script>
-    <script src="./global/js/classes/ProgressBar.js"></script>
     <script src="./global/js/classes/Item.js"></script>
     
     <script src="./global/js/main.js"></script>

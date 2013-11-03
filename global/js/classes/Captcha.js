@@ -7,8 +7,10 @@
         var me = new ArmGraph.Node( O )
 
         me._items = [];
-        me._row = 2;
-        me._col = 2;
+        // me._row = 0;
+        // me._col = 0;
+        // me._count = 0;
+        me._map = null;
         me._itemWidth = 10;
         me._itemHeight = 10;
 
@@ -26,24 +28,21 @@
                 // data: data,
                 success: function( data ) {
                     var map = data;
-                    console.log(data);
-                    console.log( "task gived!" );    
-            
+                    // console.log(data);
+                    // console.log( "task gived!" );    
 
+                    // var map = {items: [
+                    //     {id: 1, pos: {x: 0, y: 0}, path: "global/img/image0.png"},
+                    //     {id: 2, pos: {x: 1, y: 0}, path: "global/img/image1.png"},
+                    //     {id: 3, pos: {x: 0, y: 1}, path: "global/img/image2.png"},
+                    //     {id: 4, pos: {x: 1, y: 1}, path: "global/img/image3.png"}],
+                    //     row: 2,
+                    //     col: 2,
+                    //     count: 4
+                    // };                    
 
-            // var map = {items: [
-            //     {id: 1, pos: {x: 0, y: 0}, path: "http://94.251.8.30/Captcha/global/img/image0.png"},
-            //     {id: 2, pos: {x: 1, y: 0}, path: "http://94.251.8.30/Captcha/global/img/image1.png"},
-            //     {id: 3, pos: {x: 0, y: 1}, path: "http://94.251.8.30/Captcha/global/img/image2.png"},
-            //     {id: 4, pos: {x: 1, y: 1}, path: "http://94.251.8.30/Captcha/global/img/image3.png"}],
-            //     //itemWidth: itemW,
-            //     //itemHeight: itemH,
-            //     row: 2,
-            //     col: 2};
-
-                    
-
-                    self.SetMap(new Captcha.Map(map));
+                    var newMap = new Captcha.Map(map);
+                    self.SetMap(newMap);
                 }
 
             });
@@ -63,20 +62,36 @@
                 type: "POST",
                 url: "index.php/addMessage",
                 dataType: 'json',
-                data: "data="+JSON.stringify($data)+"",
+                data: "data="+JSON.stringify($data),
             
                 success: function( data ) {
-                    console.log(data);
+                    // console.log(data);
                     if(data.status == true) {
-                        console.log("update messages");
-                    } else {                        
-                        self.GetTask();
+                        //console.log("Get messages!");
+                        self.GetMessages();
+                    } else {
+                        //console.log("failed...");
 
                     }
+                    self.GetTask();
                 }
 
             });
-        };        
+        };
+
+        me.GetMessages = function() {
+            var self = this;
+
+            $.ajax({
+                url: "index.php/getMessages",
+                
+                success: function( data ) {
+                    // console.log(data);
+                    $('#messages').html(data);    
+                }
+
+            });
+        };                
 
         me.GetMap = function() {
             var items = [];
@@ -88,15 +103,18 @@
                 
             };
 
-            return new Captcha.Map({"items": items, row: this.GetRow(), col: this.GetCol()});
+            return new Captcha.Map({"items": items, row: this._map.GetRow(), col: this._map.GetCol(), count: this._map.GetCount()});
 
         };
 
         me.SetMap = function(map) {
             var self = this;
             
-            this._row = map.GetRow();
-            this._col = map.GetCol();
+            this._items = [];
+
+            this._map = map;
+            // this._row = map.GetRow();
+            // this._col = map.GetCol();
             
             loader = new ArmContext.Loader({})
             var items = map.GetItems();
@@ -108,8 +126,8 @@
             };
 
             loader.SetLisener("onLoadObject", function(img, progress) {
-                console.log(img.name + " was loaded!");
-                console.log("Progress: " + progress + "%");
+                // console.log(img.name + " was loaded!");
+                // console.log("Progress: " + progress + "%");
                 $('#myModal .modal-body .progress .bar').css('width',progress+'%')
             })
             .SetLisener("onLoad", function(object) {
@@ -160,13 +178,13 @@
             return this._height;
         };
 
-        me.GetRow = function() {
-            return this._row;
-        };
+        // me.GetRow = function() {
+        //     return this._row;
+        // };
 
-        me.GetCol = function() {
-            return this._col;
-        };
+        // me.GetCol = function() {
+        //     return this._col;
+        // };
 
         me.GetItemWidth = function() {
             return this._itemWidth;

@@ -4,9 +4,10 @@
 
         var me = {};
 
-        me._items = [];
+        me._items = {};
         me._row = 0;
         me._col = 0;
+        me._count = 0;
 
         me.GetJSON = function(itemWidth, itemHeight) {
             var items = this.GetItems();
@@ -21,7 +22,8 @@
             var map = {
                 items: items,
                 row: this.GetRow(),
-                col: this.GetCol()
+                col: this.GetCol(),
+                count: this.GetCount()
             };
 
             return map; 
@@ -37,6 +39,11 @@
             this._col = col;
         };
 
+        me.SetCount = function(count) {
+            gizmo.Filter(count, "Number");
+            this._count = count;
+        };
+
         me.SetItems = function(items) {
             gizmo.Filter(items, "Array");
             this._items = items;
@@ -50,6 +57,10 @@
             return this._col;
         };
 
+        me.GetCount = function() {
+            return this._count;
+        };
+
         me.GetItems = function() {
             return this._items;
         };
@@ -61,6 +72,9 @@
                     break;
                     
                     case "col": {  this.SetCol(O[name]); };
+                    break;
+
+                    case "count": {  this.SetCount(O[name]); };
                     break;
 
                     case "items" : {  this.SetItems(O[name]); };

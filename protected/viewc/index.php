@@ -6,7 +6,7 @@
 
     <style>
         canvas {
-            border: solid 5px #228b22;
+            //border: solid 5px #228b22;
             //margin: 0px;
             //margin-bottom: 10px;
         }
@@ -25,31 +25,9 @@
       <div class="row-fluid">
         <div class="span5">
 
-            <div class="well" id="messages">
-             
-
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Message</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php foreach($data['messages'] as $k1=>$v1): ?> 
-                <tr>
-                  <td><?php echo $v1->id; ?></td>
-                  <td><?php echo $v1->message; ?></td>
-                </tr>
-                <?php endforeach; ?>
-
-              </tbody>
-            </table>              
-            </div>
+            <div class="well" id="messages"></div>
 
             <div class="navbar-inner navbar-form">
-                <!-- <input type="text" class="span12"/> -->
-
                 <div id="captchaDiv"></div>
                 <!-- 
                 <div class="alert alert-error">
@@ -65,7 +43,7 @@
                  -->
                 <div class="input-append">
                   <input  class="span12" placeholder="Новое сообщение" id="newMessageInput" type="text">
-                  <button class="btn btn-primary" type="button">    Go!</button>
+                  <button class="btn btn-primary" id="newMessageBtn" type="button">    Go!</button>
                 </div>
 
 
@@ -79,7 +57,7 @@
     <!-- Modal -->
     <div id="myModal" class="modal hide fade" tabindex="-1" data-keyboard=false data-backdrop=false role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-header">
-        <h3 id="myModalLabel">Modal header</h3>
+        <h3 id="myModalLabel">Please wait...</h3>
       </div>
       <div class="modal-body">
         <div class="progress progress-striped active">

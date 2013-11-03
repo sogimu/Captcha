@@ -58,5 +58,6 @@ $route['*']['/'] = array('MainController', 'index');
 $route['*']['/error'] = array('ErrorController', 'index');
 $route['get']['/getTask'] = array('AjaxController', 'getTask', 'extension'=>'.json');
 $route['*']['/addMessage'] = array('AjaxController', 'addMessage');
+$route['*']['/getMessages'] = array('AjaxController', 'getMessages');
 
 ?>

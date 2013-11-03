@@ -3,10 +3,10 @@ Doo::loadCore('db/DooSmartModel');
 
 class Messages extends DooSmartModel{
 	public $id;
-    public $message;
+    public $text;
 
     public $_table = 'messages';
     public $_primarykey = 'id';
-    public $_fields = array('id', 'message');
+    public $_fields = array('id', 'text');
 }
 ?>

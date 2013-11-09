@@ -36,7 +36,7 @@ $dbmap['Ingredient']['has_many']['Food'] = array('foreign_key'=>'ingredient_id',
  * $dbconfig['prod'] = array('localhost', 'database', 'root', '1234', 'mysql', true);
  */
 
-$dbconfig['dev'] = array('localhost', 'guestBook', 'root', '1234', 'mysql',true);
-$dbconfig['prod'] = array('localhost', 'guestBook', 'root', '1234', 'mysql',true);
+$dbconfig['dev'] = array('localhost', 'guestBook', 'root', '1234', 'mysql',true, 'persistent connection'=>false);
+$dbconfig['prod'] = array('localhost', 'guestBook', 'root', '1234', 'mysql',true, 'persistent connection'=>false);
 
 ?>

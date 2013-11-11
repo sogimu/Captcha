@@ -21,7 +21,7 @@
             var x = e.e.offsetX;
             var y = e.e.offsetY;
             
-            if( this.GetPrimitiveImage().HasPoint({x: x, y: y}) ) {
+            if( this.GetPrimitiveImage().HasPoint({x: x, y: y})  && me.GetProp("owner").layer.GetTopestPrimitiveUnderPoint({x: x, y: y}) == this._primitiveImage ) {
                 
                 this.isDruging = true;
 
@@ -34,6 +34,9 @@
         .SetFunc("onMouseUp", function(e) {
             this.isDruging = false;
 
+        })
+        .SetFunc("draw", function(e) {
+            this._primitiveImage.Draw();
         })
 
         me.SetX = function(x) {

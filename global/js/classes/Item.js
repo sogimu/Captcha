@@ -4,6 +4,7 @@
 
         var me = new ArmGraph.Node( O );
 
+
         me.SetFunc("onMouseMove", function(e) {
             var x = e.e.offsetX;
             var y = e.e.offsetY;
